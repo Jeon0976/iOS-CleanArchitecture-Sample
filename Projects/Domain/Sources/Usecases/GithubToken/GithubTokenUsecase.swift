@@ -1,6 +1,6 @@
 //
-//  repoTemp.swift
-//  Data
+//  GithubTokenUsecase.swift
+//  Domain
 //
 //  Created by 전성훈 on 3/11/25.
 //

@@ -52,5 +52,17 @@ let project = Project(
             resources: [],
             dependencies: [.target(name: env.name)]
         )
+    ],
+    schemes: [
+        .scheme(
+            name: "App",
+            shared: true,
+            buildAction: .buildAction(
+                targets: ["\(env.name)"]
+            ),
+            testAction: .targets(
+                ["\(env.name)Tests"]
+            )
+        )
     ]
 )

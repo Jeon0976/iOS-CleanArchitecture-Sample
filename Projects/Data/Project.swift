@@ -43,7 +43,9 @@ let project = Project(
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Data")]
+            dependencies: [
+                .target(name: "Data")
+            ]
         )
     ],
     schemes: [
@@ -52,11 +54,10 @@ let project = Project(
             shared: true,
             buildAction: .buildAction(
                 targets: ["Data"]
+            ),
+            testAction: .targets(
+                ["DataTests"]
             )
-//            runAction: .runAction(configuration: .debug),
-//            archiveAction: .archiveAction(configuration: .debug),
-//            profileAction: .profileAction(configuration: .debug),
-//            analyzeAction: .analyzeAction(configuration: .debug)
         )
     ]
 )

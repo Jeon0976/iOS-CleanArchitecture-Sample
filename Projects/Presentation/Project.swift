@@ -62,7 +62,8 @@ let project = Project(
             shared: true,
             buildAction: .buildAction(
                 targets: ["Presentation"]
-            )
+            ),
+            testAction: .targets(["PresentationTests")
         )
     ]
 )

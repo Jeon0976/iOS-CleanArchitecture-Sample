@@ -52,6 +52,9 @@ let project = Project(
             shared: true,
             buildAction: .buildAction(
                 targets: ["Domain"]
+            ),
+            testAction: .targets(
+                ["DomainTests"]
             )
         )
     ]

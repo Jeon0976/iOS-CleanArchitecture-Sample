@@ -49,7 +49,6 @@ final class GithubTokenUseCaseTest: XCTestCase {
     func test_fetchGithubToken() async throws {
         // given
         let testCode = "testCode"
-        let exptecdToken = mockGithubTokenRepository.githubToken
         
         // when
         try await sut.fetchGithubToken(with: testCode)

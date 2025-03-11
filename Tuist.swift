@@ -9,7 +9,7 @@ let tuist = Tuist(
     project: .tuist(
         plugins: [
             .local(
-                path: .relativeToRoot("Plugins/EnvironmentPlugin"))
+                path: .relativeToRoot("Plugin/EnvironmentPlugin"))
         ],
         generationOptions: .options(),
         installOptions: .options()

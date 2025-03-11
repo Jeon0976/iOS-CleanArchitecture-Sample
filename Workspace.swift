@@ -10,5 +10,5 @@ import EnvironmentPlugin
 
 let workspace = Workspace(
     name: env.name,
-    project: ["Projects/App"]
+    projects: ["Projects/App"]
 )

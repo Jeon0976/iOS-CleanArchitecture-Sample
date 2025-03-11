@@ -16,7 +16,7 @@ let project = Project(
             name: env.name,
             destinations: .iOS,
             product: .app,
-            bundleId: "io.tuist.CleanArchitecture-GitSearch",
+            bundleId: env.organizationName,
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchScreen": [
@@ -29,8 +29,14 @@ let project = Project(
             resources: ["Resources/**"],
             dependencies: [
                 .project(
-                    target: "DependencyInjection",
-                    path: .relativeToRoot("Projects/DependencyInjection"),
+                    target: "Data",
+                    path: .relativeToRoot("Projects/Data"),
+                    status: .none,
+                    condition: nil
+                ),
+                .project(
+                    target: "Presentation",
+                    path: .relativeToRoot("Projects/Presentation"),
                     status: .none,
                     condition: nil
                 )
@@ -40,11 +46,11 @@ let project = Project(
             name: env.name + "Tests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "io.tuist.CleanArchitecture-GitSearchTests",
+            bundleId: env.name + "Tests",
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
             dependencies: [.target(name: env.name)]
-        ),
+        )
     ]
 )

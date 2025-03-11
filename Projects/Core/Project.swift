@@ -9,4 +9,34 @@ import ProjectDescription
 
 import EnvironmentPlugin
 
-let project = Project(name: "Core", targets: [])
+let project = Project(
+    name: "Core",
+    targets: [
+        .target(
+            name: "Core",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: env.organizationName + ".Core",
+            infoPlist: .default,
+            sources: ["Sources/**"],
+            resources: [],
+            dependencies: [
+                .project(
+                    target: "DependencyInjection",
+                    path: .relativeToRoot("Projects/DependencyInjection"),
+                    status: .none,
+                    condition: nil
+                )
+            ]
+        )
+    ],
+    schemes: [
+        .scheme(
+            name: "Core",
+            shared: true,
+            buildAction: .buildAction(
+                targets: ["Core"]
+            )
+        )
+    ]
+)

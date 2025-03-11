@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DependencyInjection
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

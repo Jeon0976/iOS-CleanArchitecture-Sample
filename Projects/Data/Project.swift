@@ -17,7 +17,10 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: env.organizationName + ".Data",
-            infoPlist: .default,
+            infoPlist: .extendingDefault(with: [
+                "Github_Client_Id": "Ov23liG36Nf0oA1Dbs8I",
+                "Github_Client_secrets": "eacf64e05e0b265452dcc0a4c0396f1e83e2be50"
+            ]),
             sources: ["Sources/**"],
             resources: [],
             dependencies: [
@@ -56,7 +59,11 @@ let project = Project(
                 targets: ["Data"]
             ),
             testAction: .targets(
-                ["DataTests"]
+                ["DataTests"],
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["Data"]
+                )
             )
         )
     ]

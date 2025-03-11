@@ -61,7 +61,11 @@ let project = Project(
                 targets: ["\(env.name)"]
             ),
             testAction: .targets(
-                ["\(env.name)Tests"]
+                ["\(env.name)Tests"],
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["\(env.name)"]
+                )
             )
         )
     ]

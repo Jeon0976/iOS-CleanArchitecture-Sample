@@ -43,7 +43,13 @@ let project = Project(
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Presentation")]
+            dependencies: [
+                .target(name: "Presentation"),
+                .project(
+                    target: "Domain",
+                    path: .relativeToRoot("Projects/Domain")
+                )
+            ]
         ),
         .target(
             name: "PresentationUITests",
@@ -53,7 +59,8 @@ let project = Project(
             infoPlist: .default,
             sources: ["UITests/**"],
             resources: [],
-            dependencies: [.target(name: "Presentation")]
+            dependencies: [
+                .target(name: "Presentation")]
         ),
     ],
     schemes: [
@@ -63,7 +70,12 @@ let project = Project(
             buildAction: .buildAction(
                 targets: ["Presentation"]
             ),
-            testAction: .targets(["PresentationTests")
+            testAction: .targets(
+                ["PresentationTests"], options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["Presentation"]
+                )
+            )
         )
     ]
 )

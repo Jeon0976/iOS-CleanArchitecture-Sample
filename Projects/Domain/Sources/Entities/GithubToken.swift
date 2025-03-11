@@ -9,6 +9,16 @@ public struct GithubTokenClientInfo {
     public let clientId: String
     public let clientSecret: String
     public let code: String
+    
+    public init(
+        clientId: String,
+        clientSecret: String,
+        code: String
+    ) {
+        self.clientId = clientId
+        self.clientSecret = clientSecret
+        self.code = code
+    }
 }
 
 // TODO: Type enum으로 리팩토링

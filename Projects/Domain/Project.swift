@@ -43,7 +43,13 @@ let project = Project(
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Domain")]
+            dependencies: [
+                .target(name: "Domain"),
+                .project(
+                    target: "Core",
+                    path: .relativeToRoot("Projects/Core")
+                )
+            ]
         )
     ],
     schemes: [
@@ -54,7 +60,11 @@ let project = Project(
                 targets: ["Domain"]
             ),
             testAction: .targets(
-                ["DomainTests"]
+                ["DomainTests"],
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["Domain"]
+                )
             )
         )
     ]

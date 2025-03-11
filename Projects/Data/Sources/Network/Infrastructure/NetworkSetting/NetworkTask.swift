@@ -6,7 +6,7 @@
 //
 import Foundation
 
-enum NetworkTask {
+public enum NetworkTask {
     case requestPlain
     case requestData(Data)
     case requestJSONEncodable(Encodable)

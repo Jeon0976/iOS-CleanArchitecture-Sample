@@ -7,21 +7,21 @@
 
 import Foundation
 
-final class DIContainer {
-    static let shared = DIContainer()
+open class DIContainer {
+    static public let shared = DIContainer()
     
     private var factories = [String: Any]()
     private var instances = [String: Any]()
     
     private init() { }
     
-    func register<T>(_ factory: @escaping (() -> T)) {
+    public func register<T>(_ factory: @escaping (() -> T)) {
         let key = String(describing: T.self)
         
         factories[key] = factory
     }
     
-    func register<T>(instance: T) {
+    public func register<T>(instance: T) {
         let key = String(describing: T.self)
         
         guard instances[key] == nil else {
@@ -31,7 +31,7 @@ final class DIContainer {
         instances[key] = instance
     }
     
-    func resolve<T>() -> T {
+    public func resolve<T>() -> T {
         let key = String(describing: T.self)
         
         if let instance = instances[key] as? T { return instance }

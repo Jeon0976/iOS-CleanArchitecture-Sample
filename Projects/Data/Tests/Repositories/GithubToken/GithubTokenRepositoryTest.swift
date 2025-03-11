@@ -7,29 +7,72 @@
 
 import XCTest
 
-final class GithubTokenRepositoryTest: XCTestCase {
+import Domain
 
+@testable import Data
+
+final class GithubTokenRepositoryTest: XCTestCase {
+    private var mockNetworkSession: MockNetworkSession!
+    private var sut: GithubTokenRepository!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        
+        mockNetworkSession = MockNetworkSession()
+        sut = GithubTokenRepository(networkSession: mockNetworkSession)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        mockNetworkSession = nil
+        
+        try super.tearDownWithError()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func test_requestAccessToken_success() async throws {
+        // given
+        let expectedToken = "test_token"
+        let expectedType = "type"
+        let expectedScope = "user"
+        
+        let response = GithubAccessTokenResponse(
+            accessToken: expectedToken,
+            tokenType: expectedType,
+            scope: expectedScope
+        )
+        
+        mockNetworkSession.response = response
+        
+        let clientInfo = GithubTokenClientInfo(
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            code: "test_code"
+        )
+        
+        // when
+        let result = try await sut.requestAccessToken(with: clientInfo.code)
+        
+        // then
+        XCTAssertEqual(result.token, expectedToken)
+        XCTAssertEqual(result.tokenType, expectedType)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_requestAccessToken_failure() async throws {
+        // given
+        mockNetworkSession.error = NetworkError.badConnection
+         
+         let clientInfo = GithubTokenClientInfo(
+             clientId: "test_client_id",
+             clientSecret: "test_client_secret",
+             code: "test_code"
+         )
+         
+         // when/then
+         do {
+             _ = try await sut.requestAccessToken(with: clientInfo.code)
+             XCTFail("실패해야 함")
+         } catch {
+             XCTAssertEqual(error as? NetworkError, NetworkError.badConnection)
+         }
     }
-
 }

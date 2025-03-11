@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct JSONEncoding: ParameterEncoding {
+public struct JSONEncoding: ParameterEncoding {
     static let `default` = JSONEncoding()
     
-    func encode(parameters: [String: Any], into request: inout URLRequest) throws {
+    public func encode(parameters: [String: Any], into request: inout URLRequest) throws {
         do {
             let data = try JSONSerialization.data(withJSONObject: parameters)
             

@@ -9,7 +9,10 @@ import Foundation
 
 import Shared
 
-final class NetworkLogger {
+public final class NetworkLogger {
+    
+    public init() { }
+    
     func willSend<E: NetworkEndpoint>(_ request: URLRequest, endpoint: E) {
         let url = request.url?.absoluteString ?? "unknown url"
         let method = request.httpMethod ?? "unknown method"

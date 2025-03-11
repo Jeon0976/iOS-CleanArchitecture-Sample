@@ -5,6 +5,9 @@
 //  Created by 전성훈 on 3/11/25.
 //
 
+import Foundation
+
 public protocol GithubTokenRepositoryInterface {
-    func requestAccessToken(request: GithubTokenClientInfo) async throws -> GithubToken
+    func requestCode() async throws -> URL
+    func requestAccessToken(with code: String) async throws -> GithubToken
 }

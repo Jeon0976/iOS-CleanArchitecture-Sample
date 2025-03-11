@@ -30,15 +30,15 @@ let project = Project(
             dependencies: [
                 .project(
                     target: "Data",
-                    path: .relativeToRoot("Projects/Data"),
-                    status: .none,
-                    condition: nil
+                    path: .relativeToRoot("Projects/Data")
                 ),
                 .project(
                     target: "Presentation",
-                    path: .relativeToRoot("Projects/Presentation"),
-                    status: .none,
-                    condition: nil
+                    path: .relativeToRoot("Projects/Presentation")
+                ),
+                .project(
+                    target: "Shared",
+                    path: .relativeToRoot("Projects/Shared")
                 )
             ]
         ),

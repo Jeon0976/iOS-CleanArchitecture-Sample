@@ -23,15 +23,15 @@ let project = Project(
             dependencies: [
                 .project(
                     target: "DependencyInjection",
-                    path: .relativeToRoot("Projects/DependencyInjection"),
-                    status: .none,
-                    condition: nil
+                    path: .relativeToRoot("Projects/DependencyInjection")
                 ),
                 .project(
                     target: "Domain",
-                    path: .relativeToRoot("Projects/Domain"),
-                    status: .none,
-                    condition: nil
+                    path: .relativeToRoot("Projects/Domain")
+                ),
+                .project(
+                    target: "Shared",
+                    path: .relativeToRoot("Projects/Shared")
                 )
             ]
         ),

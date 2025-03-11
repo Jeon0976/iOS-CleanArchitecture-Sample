@@ -6,3 +6,7 @@
 //
 
 import ProjectDescription
+
+import EnvironmentPlugin
+
+let project = Project(name: "Core", targets: [])

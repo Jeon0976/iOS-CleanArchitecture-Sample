@@ -16,7 +16,7 @@ final class DIContainer {
     private init() { }
     
     func register<T>(_ factory: @escaping (() -> T)) {
-        let ley = String(describing: T.self)
+        let key = String(describing: T.self)
         
         factories[key] = factory
     }

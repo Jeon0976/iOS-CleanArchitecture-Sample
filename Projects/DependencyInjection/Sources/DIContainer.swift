@@ -26,7 +26,6 @@ final class DIContainer {
         
         guard instances[key] == nil else {
             fatalError("\(key)가 이미 인스턴스에 저장되어 있습니다.")
-            return
         }
         
         instances[key] = instance

@@ -9,6 +9,7 @@ import Core
 
 final class MockTokenStorage: TokenStorage {
     var storedToken: String?
+    var cleared = false
     
     func store(token: String) {
         storedToken = token
@@ -19,6 +20,7 @@ final class MockTokenStorage: TokenStorage {
     }
     
     func clear() {
+        cleared = true
         storedToken = nil
     }
 }

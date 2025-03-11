@@ -20,6 +20,8 @@ final class MockGithubTokenRepository: GithubTokenRepositoryInterface {
         tokenType: "type"
     )
     
+    var testCode: String?
+    
     func requestCode() async throws -> URL {
         
         if isError {
@@ -37,6 +39,8 @@ final class MockGithubTokenRepository: GithubTokenRepositoryInterface {
         if isError {
             throw error
         }
+        
+        self.testCode = code
         
         return githubToken
     }

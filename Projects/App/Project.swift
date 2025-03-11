@@ -10,10 +10,10 @@ import ProjectDescription
 import EnvironmentPlugin
 
 let project = Project(
-    name: "CleanArchitecture-GitSearch",
+    name: env.name,
     targets: [
         .target(
-            name: "CleanArchitecture-GitSearch",
+            name: env.name,
             destinations: .iOS,
             product: .app,
             bundleId: "io.tuist.CleanArchitecture-GitSearch",
@@ -37,14 +37,14 @@ let project = Project(
             ]
         ),
         .target(
-            name: "CleanArchitecture-GitSearchTests",
+            name: env.name + "Tests",
             destinations: .iOS,
             product: .unitTests,
             bundleId: "io.tuist.CleanArchitecture-GitSearchTests",
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "CleanArchitecture-GitSearch")]
+            dependencies: [.target(name: env.name)]
         ),
     ]
 )

@@ -6,9 +6,9 @@
 //
 
 public struct GithubTokenClientInfo {
-    let clientId: String
-    let clientSecret: String
-    let code: String
+    public let clientId: String
+    public let clientSecret: String
+    public let code: String
     
     public init(
         clientId: String,
@@ -23,8 +23,8 @@ public struct GithubTokenClientInfo {
 
 // TODO: Type enum으로 리팩토링
 public struct GithubToken {
-    let token: String
-    let tokenType: String
+    public let token: String
+    public let tokenType: String
     
     public init(
         token: String,

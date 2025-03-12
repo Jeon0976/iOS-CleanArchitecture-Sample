@@ -13,7 +13,7 @@ import Foundation
 /// - 특정 저장 용량과 함께 이미지 데이터를 저장하고 검색하는 메커니즘을 제공합니다.
 /// - 구현체는 이 프로토콜을 사용하여 다양한 저장 방식(메모리, 캐시 등)을 통해 구체화할 수 있도록 설계했습니다.
 /// - async/await 패턴을 사용하여 비동기 호출을 지원합니다.
-protocol PosterImageStorageInterface {
+public protocol PosterImageStorageInterface {
     var capacity: UInt { get }
     
     func getData(key: String) async -> Data?

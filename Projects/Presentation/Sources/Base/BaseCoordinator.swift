@@ -12,8 +12,14 @@ public protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get }
     
     var childCoordinators: [Coordinator] { get set }
-    var finishDelegate: CoordinatorFinishDelegate? { get set }
     var viewControllerFactory: ViewControllerFactoryInterface { get }
+
+    var finishDelegate: CoordinatorFinishDelegate? { get set }
+    
+    init(
+        navigationController: UINavigationController,
+        factory: ViewControllerFactoryInterface
+    )
     
     func start()
     func attachChild(_ coordinator: Coordinator)

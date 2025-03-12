@@ -25,11 +25,29 @@ public final class DataDIContainer {
         container.register(instance: networkSession)
     }
     
+    private func registerPersistantStorages() {
+        let posterImageStorage: PosterImageStorageInterface = LRUCacheStorage()
+        
+        container.register(instance: posterImageStorage)
+    }
+    
     private func registerRepository() {
         let githubTokenRepository: GithubTokenRepositoryInterface = GithubTokenRepository(
             networkSession: container.resolve()
         )
+                
+        let searchUserRepository: SearchUserRepositoryInterface = SearchUserRepository(
+            networkSession: container.resolve()
+        )
+        
+        let posterImageRepository: PosterImageRepsitoryInterface = PosterImageRepository(
+            networkSession: container.resolve(),
+            cache: container.resolve()
+        )
         
         container.register(instance: githubTokenRepository)
+        container.register(instance: searchUserRepository)
+        container.register(instance: posterImageRepository)
     }
+    
 }

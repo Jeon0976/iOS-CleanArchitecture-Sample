@@ -8,9 +8,9 @@
 import Foundation
 
 public struct GithubUsersPage: Equatable {
-    let totalPage: Int
-    let currentPage: Int
-    let users: [GithubUser]
+    public let totalPage: Int
+    public let currentPage: Int
+    public let users: [GithubUser]
     
     private let defaultPerPage = 30
     
@@ -30,10 +30,10 @@ public struct GithubUsersPage: Equatable {
 }
 
 public struct GithubUser: Equatable {
-    let id: String
-    let name: String
-    let posterPath: String
-    let url: URL
+    public let id: String
+    public let name: String
+    public let posterPath: String
+    public let url: URL
     
     public init(
         id: String,

@@ -13,11 +13,11 @@ final public class DomainDIContainer {
     private let container = DIContainer.shared
     
     private init() {
-        registerGithubTokenUsecase()
+        registerGithubTokenUseCase()
+        registerSearchUserUseCase()
     }
     
-    private func registerGithubTokenUsecase() {
-        
+    private func registerGithubTokenUseCase() {
         container.register {
             let githubTokenUseCase: GithubTokenUseCaseInterface = GithubTokenUseCase(
                 tokenStorage: DIContainer.shared.resolve(),
@@ -25,6 +25,18 @@ final public class DomainDIContainer {
             )
             
             return githubTokenUseCase
+        }
+    }
+    
+    private func registerSearchUserUseCase() {
+        container.register {
+            let searchUserUseCase: SearchUserUseCaseInterface = SearchUserUseCase(
+                tokenStorage: DIContainer.shared.resolve(),
+                searchUserRepository: DIContainer.shared.resolve(),
+                posterImageRepository: DIContainer.shared.resolve()
+            )
+            
+            return searchUserUseCase
         }
     }
 }

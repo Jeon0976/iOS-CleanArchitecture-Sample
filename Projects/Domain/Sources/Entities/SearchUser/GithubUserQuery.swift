@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GithubUserQuery {
-    let q: String
+    public let q: String
     
     public init(q: String) {
         self.q = q

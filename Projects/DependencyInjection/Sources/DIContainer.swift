@@ -23,7 +23,7 @@ open class DIContainer {
     
     public func register<T>(instance: T) {
         let key = String(describing: T.self)
-        
+        print("TEST")
         guard instances[key] == nil else {
             fatalError("\(key)가 이미 인스턴스에 저장되어 있습니다.")
         }
@@ -33,6 +33,7 @@ open class DIContainer {
     
     public func resolve<T>() -> T {
         let key = String(describing: T.self)
+        print(T.self)
         
         if let instance = instances[key] as? T { return instance }
         

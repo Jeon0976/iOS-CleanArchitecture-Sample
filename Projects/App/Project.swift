@@ -9,22 +9,28 @@ import ProjectDescription
 
 import EnvironmentPlugin
 
+
+let configuration: [Configuration] = [.debug(name: .debug), .release(name: .release)]
+
+let settings: Settings = .settings(
+    base: env.baseSetting,
+    configurations: configuration,
+    defaultSettings: .recommended
+)
+
+
 let project = Project(
     name: env.name,
+    organizationName: env.organizationName,
+    settings: settings,
     targets: [
         .target(
             name: env.name,
             destinations: .iOS,
             product: .app,
-            bundleId: env.organizationName,
-            infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchScreen": [
-                        "UIColorName": "",
-                        "UIImageName": "",
-                    ],
-                ]
-            ),
+            bundleId: env.organizationName + "App",
+            deploymentTargets: env.deploymentTargets,
+            infoPlist: .file(path: "Support/Info.plist"),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [
@@ -40,13 +46,15 @@ let project = Project(
                     target: "Shared",
                     path: .relativeToRoot("Projects/Shared")
                 )
-            ]
+            ],
+            settings: .settings(base: env.baseSetting)
         ),
         .target(
             name: env.name + "Tests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: env.name + "Tests",
+            bundleId: env.organizationName + "Tests",
+            deploymentTargets: env.deploymentTargets,
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
@@ -55,7 +63,7 @@ let project = Project(
     ],
     schemes: [
         .scheme(
-            name: "App",
+            name: env.name,
             shared: true,
             buildAction: .buildAction(
                 targets: ["\(env.name)"]
@@ -67,6 +75,7 @@ let project = Project(
                     codeCoverageTargets: ["\(env.name)"]
                 )
             )
+            
         )
     ]
 )

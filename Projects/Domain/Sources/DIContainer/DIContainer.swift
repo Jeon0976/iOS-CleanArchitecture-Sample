@@ -7,7 +7,7 @@
 
 import DependencyInjection
 
-final class DomainDIContainer {
+final public class DomainDIContainer {
     static public let shared = DomainDIContainer()
     
     private let container = DIContainer.shared
@@ -17,11 +17,14 @@ final class DomainDIContainer {
     }
     
     private func registerGithubTokenUsecase() {
+        
         container.register {
-            GithubTokenUsecase(
+            let githubTokenUseCase: GithubTokenUseCaseInterface = GithubTokenUseCase(
                 tokenStorage: DIContainer.shared.resolve(),
                 githubTokenRepository: DIContainer.shared.resolve()
             )
+            
+            return githubTokenUseCase
         }
     }
 }

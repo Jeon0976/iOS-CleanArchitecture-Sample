@@ -23,7 +23,7 @@ final class GithubTokenRepository: GithubTokenRepositoryInterface {
         self.networkSession = networkSession
     }
     
-    func requestCode() async throws -> URL {
+    func requestCode() throws -> URL {
         guard let clientID = loadAPIPlistDictionary()?.clientID else {
             throw DataError.invalidAPIPlistData
         }

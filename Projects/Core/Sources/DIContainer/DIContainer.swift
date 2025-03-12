@@ -7,7 +7,7 @@
 
 import DependencyInjection
 
-final class CoreDIContainer {
+public final class CoreDIContainer {
     static public let shared = CoreDIContainer()
     
     private let container = DIContainer.shared
@@ -17,7 +17,7 @@ final class CoreDIContainer {
     }
     
     private func registerKeychainStorage() {
-        let userDefaultsTokenStorage = UserDefaultsTokenStorage()
+        let userDefaultsTokenStorage: TokenStorage = UserDefaultsTokenStorage()
         
         container.register(instance: userDefaultsTokenStorage)
     }

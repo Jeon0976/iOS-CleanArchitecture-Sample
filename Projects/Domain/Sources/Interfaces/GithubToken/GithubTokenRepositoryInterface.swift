@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol GithubTokenRepositoryInterface {
-    func requestCode() async throws -> URL
+    func requestCode() throws -> URL
     func requestAccessToken(with code: String) async throws -> GithubToken
 }

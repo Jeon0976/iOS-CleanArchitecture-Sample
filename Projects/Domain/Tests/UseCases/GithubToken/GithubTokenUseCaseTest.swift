@@ -13,14 +13,14 @@ final class GithubTokenUseCaseTest: XCTestCase {
     private var mockTokenStorage: MockTokenStorage!
     private var mockGithubTokenRepository: MockGithubTokenRepository!
     
-    private var sut: GithubTokenUsecase!
+    private var sut: GithubTokenUseCase!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
         mockTokenStorage = MockTokenStorage()
         mockGithubTokenRepository = MockGithubTokenRepository()
-        sut = GithubTokenUsecase(
+        sut = GithubTokenUseCase(
             tokenStorage: mockTokenStorage,
             githubTokenRepository: mockGithubTokenRepository
         )
@@ -35,12 +35,12 @@ final class GithubTokenUseCaseTest: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_requestCode() async throws {
+    func test_requestCode() throws {
         // given
         let expectedURL = mockGithubTokenRepository.testURL
         
         // when
-        let requestURL = try await sut.requestCode()
+        let requestURL = try sut.requestCode()
         
         // then
         XCTAssertEqual(requestURL, expectedURL)

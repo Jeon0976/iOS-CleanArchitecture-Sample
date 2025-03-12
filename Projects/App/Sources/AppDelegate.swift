@@ -1,13 +1,17 @@
 //
 //  AppDelegate.swift
-//  MAJU
+//  GitSearch
 //
-//  Created by 전성훈 on 3/5/25.
-//  Copyright © 2025 com.maju. All rights reserved.
+//  Created by 전성훈 on 3/11/25.
 //
 
 import UIKit
+
 import DependencyInjection
+import Presentation
+import Data
+import Domain
+import Core
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +19,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        
+        _ = DataDIContainer.shared
+        _ = CoreDIContainer.shared
+        _ = DomainDIContainer.shared
+        
         return true
     }
 

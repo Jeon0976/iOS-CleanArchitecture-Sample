@@ -22,7 +22,7 @@ final class MockGithubTokenRepository: GithubTokenRepositoryInterface {
     
     var testCode: String?
     
-    func requestCode() async throws -> URL {
+    func requestCode() throws -> URL {
         
         if isError {
             throw error

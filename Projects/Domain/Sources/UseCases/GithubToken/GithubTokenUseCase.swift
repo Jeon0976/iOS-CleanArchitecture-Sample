@@ -9,14 +9,14 @@ import Foundation
 
 import Core
 
-protocol GithubTokenUseCaseInterface: AnyObject {
-    func requestCode() async throws -> URL
+public protocol GithubTokenUseCaseInterface: AnyObject {
+    func requestCode() throws -> URL
     func fetchGithubToken(with code: String) async throws
     func retriveToken() -> String?
     func clearToken()
 }
-
-final class GithubTokenUsecase: GithubTokenUseCaseInterface {
+ 
+final class GithubTokenUseCase: GithubTokenUseCaseInterface {
     private let tokenStorage: TokenStorage
     private let githubTokenRepository: GithubTokenRepositoryInterface
     
@@ -28,21 +28,21 @@ final class GithubTokenUsecase: GithubTokenUseCaseInterface {
         self.githubTokenRepository = githubTokenRepository
     }
     
-    func requestCode() async throws -> URL {
-        return try await githubTokenRepository.requestCode()
+    public func requestCode() throws -> URL {
+        return try githubTokenRepository.requestCode()
     }
     
-    func fetchGithubToken(with code: String) async throws {
+    public func fetchGithubToken(with code: String) async throws {
         let token = try await githubTokenRepository.requestAccessToken(with: code)
         
         tokenStorage.store(token: token.token)
     }
     
-    func retriveToken() -> String? {
+    public func retriveToken() -> String? {
         return tokenStorage.retrieve()
     }
     
-    func clearToken() {
+    public func clearToken() {
         tokenStorage.clear()
     }
 }

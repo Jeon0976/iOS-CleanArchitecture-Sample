@@ -7,7 +7,9 @@
 
 import DependencyInjection
 
-final class DataDIContainer {
+import Domain
+
+public final class DataDIContainer {
     static public let shared = DataDIContainer()
     
     private let container = DIContainer.shared
@@ -18,13 +20,13 @@ final class DataDIContainer {
     }
     
     private func registerNetworkSession() {
-        let networkSession = NetworkSession()
-        
+        let networkSession: NetworkSession = NetworkSession()
+
         container.register(instance: networkSession)
     }
     
     private func registerRepository() {
-        let githubTokenRepository = GithubTokenRepository(
+        let githubTokenRepository: GithubTokenRepositoryInterface = GithubTokenRepository(
             networkSession: container.resolve()
         )
         

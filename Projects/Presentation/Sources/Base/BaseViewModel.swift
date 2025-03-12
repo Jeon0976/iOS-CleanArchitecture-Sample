@@ -8,13 +8,13 @@
 import Foundation
 
 @MainActor
-protocol CoordinatorActions: AnyObject {}
+public protocol CoordinatorActions: AnyObject {}
 
-protocol ViewModelInput {}
-protocol ViewModelOutput {}
+public protocol ViewModelInput {}
+public protocol ViewModelOutput {}
 
 @MainActor
-protocol BaseViewModel {
+public protocol BaseViewModel {
     associatedtype Input: ViewModelInput
     associatedtype Output: ViewModelOutput
     

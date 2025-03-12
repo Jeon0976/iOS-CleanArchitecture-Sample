@@ -8,14 +8,16 @@
 import UIKit
 
 @MainActor
-class BaseViewController: UIViewController {
-    override func viewDidLoad() {
+public class BaseViewController: UIViewController {
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLayout()
         setupAttribute()
+        bind()
     }
     
-    func setupLayout() { }
-    func setupAttribute() { }
+    func setupLayout() {}
+    func setupAttribute() {}
+    func bind() {}
 }

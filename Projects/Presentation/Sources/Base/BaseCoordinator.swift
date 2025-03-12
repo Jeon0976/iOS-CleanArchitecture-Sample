@@ -8,11 +8,12 @@
 import UIKit
 
 @MainActor
-protocol Coordinator: AnyObject {
+public protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get }
     
     var childCoordinators: [Coordinator] { get set }
     var finishDelegate: CoordinatorFinishDelegate? { get set }
+    var viewControllerFactory: ViewControllerFactoryInterface { get }
     
     func start()
     func attachChild(_ coordinator: Coordinator)
@@ -20,13 +21,13 @@ protocol Coordinator: AnyObject {
 }
 
 extension Coordinator {
-    func attachChild(_ coordinator: Coordinator) {
+    public func attachChild(_ coordinator: Coordinator) {
         if !childCoordinators.contains(where: { $0 === coordinator}) {
             childCoordinators.append(coordinator)
         }
     }
     
-    func detachChild(_ coordinator: Coordinator) {
+    public func detachChild(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
             childCoordinators.remove(at: index)
         }
@@ -34,6 +35,6 @@ extension Coordinator {
 }
 
 @MainActor
-protocol CoordinatorFinishDelegate: AnyObject {
+public protocol CoordinatorFinishDelegate: AnyObject {
     func coordinatorDidFinish(_ coordinator: Coordinator)
 }

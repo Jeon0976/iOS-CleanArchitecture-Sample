@@ -17,7 +17,11 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: env.organizationName + ".Data",
-            infoPlist: .default,
+            deploymentTargets: env.deploymentTargets,
+            infoPlist: .extendingDefault(with: [
+                "Github_Client_Id": "Ov23liG36Nf0oA1Dbs8I",
+                "Github_Client_secrets": "eacf64e05e0b265452dcc0a4c0396f1e83e2be50"
+            ]),
             sources: ["Sources/**"],
             resources: [],
             dependencies: [
@@ -40,10 +44,13 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: env.organizationName + ".DataTests",
+            deploymentTargets: env.deploymentTargets,
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Data")]
+            dependencies: [
+                .target(name: "Data")
+            ]
         )
     ],
     schemes: [
@@ -52,11 +59,14 @@ let project = Project(
             shared: true,
             buildAction: .buildAction(
                 targets: ["Data"]
+            ),
+            testAction: .targets(
+                ["DataTests"],
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["Data"]
+                )
             )
-//            runAction: .runAction(configuration: .debug),
-//            archiveAction: .archiveAction(configuration: .debug),
-//            profileAction: .profileAction(configuration: .debug),
-//            analyzeAction: .analyzeAction(configuration: .debug)
         )
     ]
 )

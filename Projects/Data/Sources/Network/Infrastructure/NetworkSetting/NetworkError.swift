@@ -5,7 +5,7 @@
 //  Created by 전성훈 on 3/11/25.
 //
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case invalidURL
     case badConnection
     case invalidResponse

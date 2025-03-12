@@ -23,4 +23,6 @@ public let env = ProjectEnvironment(
     baseSetting: SettingsDictionary()
         .marketingVersion("0.0.1")
         .currentProjectVersion("1")
+        .otherLinkerFlags(["-ObjC"])
+
 )

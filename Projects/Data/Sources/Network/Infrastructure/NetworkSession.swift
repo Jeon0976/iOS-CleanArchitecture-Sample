@@ -7,13 +7,12 @@
 
 import Foundation
 
-final class NetworkSession {
+open class NetworkSession {
     private let session: URLSession
     private let isStub: Bool
     private let logger: NetworkLogger?
     
-    
-    init(
+    public init(
         session: URLSession = .shared,
         isStub: Bool = false,
         logger: NetworkLogger? = NetworkLogger()
@@ -23,7 +22,7 @@ final class NetworkSession {
         self.logger = logger
     }
     
-    func request<T: Decodable, E: NetworkEndpoint>(
+    open func request<T: Decodable, E: NetworkEndpoint>(
         _ endpoint: E,
         type: T.Type
     ) async throws -> T {
@@ -80,7 +79,7 @@ final class NetworkSession {
         }
     }
     
-    func requestWithNoContent<E: NetworkEndpoint>(
+    open func requestWithNoContent<E: NetworkEndpoint>(
         _ endpoint: E
     ) async throws {
         guard !isStub else {
@@ -122,7 +121,7 @@ final class NetworkSession {
         }
     }
     
-    func request<T: Decodable, E: NetworkEndpoint>(
+    open func request<T: Decodable, E: NetworkEndpoint>(
         _ endpoint: E,
         type: T.Type,
         completion: @escaping (Result<T, Error>) -> Void
@@ -189,7 +188,7 @@ final class NetworkSession {
         }
     }
     
-    func requestWithNoContent<E: NetworkEndpoint>(
+    open func requestWithNoContent<E: NetworkEndpoint>(
         _ endpoint: E,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable {

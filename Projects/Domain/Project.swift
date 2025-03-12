@@ -17,6 +17,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: env.organizationName + ".Domain",
+            deploymentTargets: env.deploymentTargets,
             infoPlist: .default,
             sources: ["Sources/**"],
             resources: [],
@@ -40,10 +41,17 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: env.organizationName + ".DomainTests",
+            deploymentTargets: env.deploymentTargets,
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Domain")]
+            dependencies: [
+                .target(name: "Domain"),
+                .project(
+                    target: "Core",
+                    path: .relativeToRoot("Projects/Core")
+                )
+            ]
         )
     ],
     schemes: [
@@ -52,6 +60,13 @@ let project = Project(
             shared: true,
             buildAction: .buildAction(
                 targets: ["Domain"]
+            ),
+            testAction: .targets(
+                ["DomainTests"],
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: ["Domain"]
+                )
             )
         )
     ]

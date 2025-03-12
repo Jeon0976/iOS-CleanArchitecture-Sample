@@ -17,6 +17,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: env.organizationName + ".Shared",
+            deploymentTargets: env.deploymentTargets,
             infoPlist: .default,
             sources: ["Sources/**"],
             resources: [],

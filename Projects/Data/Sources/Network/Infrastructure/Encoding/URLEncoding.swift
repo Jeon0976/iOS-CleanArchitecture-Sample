@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct URLEncoding: ParameterEncoding {
+public struct URLEncoding: ParameterEncoding {
     enum Destination {
         case queryString
         case httpBody
@@ -22,7 +22,7 @@ struct URLEncoding: ParameterEncoding {
     static let queryString = URLEncoding(.queryString)
     static let httpBody = URLEncoding(.httpBody)
     
-    func encode(parameters: [String: Any], into request: inout URLRequest) throws {
+    public func encode(parameters: [String: Any], into request: inout URLRequest) throws {
         guard let url = request.url else { throw NetworkError.invalidURL }
         
         if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {

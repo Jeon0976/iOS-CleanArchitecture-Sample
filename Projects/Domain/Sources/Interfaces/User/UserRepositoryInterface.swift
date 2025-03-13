@@ -1,0 +1,7 @@
+//
+//  UserRepositoryInterface.swift
+//  Domain
+//
+//  Created by 전성훈 on 3/13/25.
+//
+

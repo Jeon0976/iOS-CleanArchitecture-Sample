@@ -7,15 +7,15 @@
 
 import UIKit
 
-public final class GithubTokenCoordinator: Coordinator {
-    public var navigationController: UINavigationController
+final class GithubTokenCoordinator: Coordinator {
+    var navigationController: UINavigationController
     
-    public var childCoordinators: [Coordinator] = []
-    public var viewControllerFactory: ViewControllerFactoryInterface
+    var childCoordinators: [Coordinator] = []
+    var viewControllerFactory: ViewControllerFactoryInterface
 
-    public weak var finishDelegate:  CoordinatorFinishDelegate?
+    weak var finishDelegate:  CoordinatorFinishDelegate?
     
-    public init(
+    init(
         navigationController: UINavigationController,
         factory: ViewControllerFactoryInterface
     ) {
@@ -23,11 +23,17 @@ public final class GithubTokenCoordinator: Coordinator {
         self.viewControllerFactory = factory
     }
     
-    public func start() {
+    func start() {
+        let viewController = viewControllerFactory.makeGithubTokenViewController()
         
+        viewController.viewModel.coordinator = self
+        navigationController.pushViewController(
+            viewController,
+            animated: false
+        )
     }
     
-    public func start(window: UIWindow) {
+    func start(window: UIWindow) {
         let viewController = viewControllerFactory.makeGithubTokenViewController()
         
         viewController.viewModel.coordinator = self
@@ -42,7 +48,7 @@ public final class GithubTokenCoordinator: Coordinator {
 }
 
 extension GithubTokenCoordinator: GithubTokenCoordinatorActions {
-    public func moveToRoot() {
+    func moveToRoot() {
         finishDelegate?.coordinatorDidFinish(self)
     }
 }

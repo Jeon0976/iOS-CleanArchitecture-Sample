@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-public final class GithubTokenViewController: BaseViewController {
+final class GithubTokenViewController: BaseViewController {
     // MARK: - Property
     var viewModel: GithubTokenViewModel!
     

@@ -31,7 +31,7 @@ struct SearchUserViewModelOutput: ViewModelOutput {
     let isLoading: AnyPublisher<(type: SearchUserLoadingType, isLoading: Bool), Never>
 }
 
-final class SearcUserViewModel: BaseViewModel, ObservableObject {
+final class SearchUserViewModel: BaseViewModel, ObservableObject {
     private var searchUserUseCase: SearchUserUseCaseInterface!
     
     private var cancellables = Set<AnyCancellable>()
@@ -47,6 +47,12 @@ final class SearcUserViewModel: BaseViewModel, ObservableObject {
     private let usersSubject = CurrentValueSubject<[SearchUserItemViewModel], Never>([])
     private let errorSubject = PassthroughSubject<Error, Never>()
     private let isLoadingSubject = CurrentValueSubject<(type: SearchUserLoadingType, isLoading: Bool), Never>((.fullScreen, false))
+    
+    var users: [SearchUserItemViewModel] {
+        get {
+            usersSubject.value
+        }
+    }
     
     init(
         searchUserUseCase: SearchUserUseCaseInterface

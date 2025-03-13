@@ -8,8 +8,8 @@
 import UIKit
 
 @MainActor
-public class BaseViewController: UIViewController {
-    public override func viewDidLoad() {
+class BaseViewController: UIViewController {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         setupLayout()

@@ -7,15 +7,15 @@
 
 import UIKit
 
-public final class SearchUserCoordinator: Coordinator {
-    public var navigationController: UINavigationController
+final class SearchUserCoordinator: Coordinator {
+    var navigationController: UINavigationController
     
-    public var childCoordinators: [Coordinator] = []
-    public var viewControllerFactory: ViewControllerFactoryInterface
-
-    public weak var finishDelegate: CoordinatorFinishDelegate?
+    var childCoordinators: [Coordinator] = []
+    var viewControllerFactory: ViewControllerFactoryInterface
     
-    public init(
+    weak var finishDelegate: CoordinatorFinishDelegate?
+    
+    init(
         navigationController: UINavigationController,
         factory: ViewControllerFactoryInterface
     ) {
@@ -23,7 +23,19 @@ public final class SearchUserCoordinator: Coordinator {
         self.viewControllerFactory = factory
     }
     
-    public func start() {
+    func start() {
+        let viewController = viewControllerFactory.makeSearchUserViewController()
         
+        viewController.viewModel.coordinator = self
+        navigationController.pushViewController(
+            viewController,
+            animated: false
+        )
+    }
+}
+
+extension SearchUserCoordinator: SearchUserCoordinatorActions {
+    func backToLogin() {
+        finishDelegate?.coordinatorDidFinish(self)
     }
 }

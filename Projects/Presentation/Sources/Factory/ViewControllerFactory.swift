@@ -10,20 +10,27 @@ import UIKit
 import DependencyInjection
 
 @MainActor
-public protocol ViewControllerFactoryInterface {
+protocol ViewControllerFactoryInterface {
     func makeGithubTokenViewController() -> GithubTokenViewController
+    func makeSearchUserViewController() -> SearchUserViewController
 }
 
-public final class ViewControllerFactory: ViewControllerFactoryInterface {
-    public static let shared = ViewControllerFactory()
+final class ViewControllerFactory: ViewControllerFactoryInterface {
+    static let shared = ViewControllerFactory()
     
     private init() { }
     
     private let container = DIContainer.shared
     
-    public func makeGithubTokenViewController() -> GithubTokenViewController {
+    func makeGithubTokenViewController() -> GithubTokenViewController {
         let viewModel = GithubTokenViewModel(githubTokenUseCase: container.resolve())
         
         return GithubTokenViewController(viewModel: viewModel)
+    }
+    
+    func makeSearchUserViewController() -> SearchUserViewController {
+        let viewModel = SearchUserViewModel(searchUserUseCase: container.resolve())
+        
+        return SearchUserViewController(viewModel: viewModel)
     }
 }

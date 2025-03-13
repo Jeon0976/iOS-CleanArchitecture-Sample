@@ -16,6 +16,7 @@ public protocol GithubTokenCoordinatorActions: AnyObject {
 
 struct GithubTokenViewInput: ViewModelInput {
     let loginButtonTapped: AnyPublisher<Void, Never>
+    let redirectCode: AnyPublisher<String, Never>
 }
 
 struct GithubTokenViewOutput: ViewModelOutput {
@@ -45,6 +46,7 @@ final class GithubTokenViewModel: BaseViewModel, ObservableObject {
     ) -> GithubTokenViewOutput {
         
         bindLoginButtonTapped(input.loginButtonTapped)
+        handleAuthorizationCode(input.redirectCode)
         
         return Output(
             url: urlSubject.eraseToAnyPublisher(),
@@ -74,16 +76,19 @@ final class GithubTokenViewModel: BaseViewModel, ObservableObject {
         errorSubject.send(error)
     }
     
-    func handleAuthorizationCode(_ code: String) {
-        Task {
-            do {
-                try await tokenUseCase.fetchGithubToken(with: code)
-                
-                navigateToRoot()
-            } catch {
-                handleError(error)
+    func handleAuthorizationCode(_ code: AnyPublisher<String, Never>) {
+        code.sink { [weak self] personalCode in
+            Task {
+                do {
+                    try await self?.tokenUseCase.fetchGithubToken(with: personalCode)
+                    
+                    self?.navigateToRoot()
+                } catch {
+                    self?.handleError(error)
+                }
             }
         }
+        .store(in: &cancellables)
     }
     
     private func navigateToRoot() {

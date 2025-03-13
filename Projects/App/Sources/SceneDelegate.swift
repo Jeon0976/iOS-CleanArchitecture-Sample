@@ -7,53 +7,42 @@
 
 import UIKit
 
-import DependencyInjection
-import Presentation
-import Data
-import Domain
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
     var window: UIWindow?
-
+    private var appCoordinator: AppCoordinator!
     
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        print("AFAF")
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        print("AA")
         let window = UIWindow(windowScene: windowScene)
 
-        let coordinator = GithubTokenCoordinator(
-            navigationController: UINavigationController(),
-            factory: ViewControllerFactory.shared
-        )
+        let coordinator = AppCoordinator()
         
-        coordinator.start(window: window)
-
+        coordinator.launch(with: window)
+        
+        self.appCoordinator = coordinator
         self.window = window
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Scene이 해제될 때 호출
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // App이 활성화될 때 호출
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // App이 비활성화될 때 호출
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // App이 포그라운드로 들어갈 때 호출
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // App이 백그라운드로 들어갈 때 호출
+    func scene(
+        _ scene: UIScene,
+        openURLContexts URLContexts: Set<UIOpenURLContext>
+    ) {
+        if let url = URLContexts.first?.url {
+            if url.absoluteString.starts(with: "findusername://"),
+               let code = url.absoluteString
+                .split(separator: "=")
+                .last
+                .map({ String($0)})
+            {
+                appCoordinator.fetchGithubAccessToken(with: code)
+            }
+        }
     }
 }

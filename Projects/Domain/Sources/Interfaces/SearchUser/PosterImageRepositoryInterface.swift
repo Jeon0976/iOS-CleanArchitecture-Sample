@@ -10,6 +10,6 @@ import Foundation
 public protocol PosterImageRepsitoryInterface {
     func featchPoster(
         with imagePath: String,
-        userID: String
+        userID: Int
     ) async throws -> Data
 }

@@ -16,6 +16,7 @@ public final class DataDIContainer {
     
     private init() {
         registerNetworkSession()
+        registerPersistantStorages()
         registerRepository()
     }
     
@@ -26,7 +27,7 @@ public final class DataDIContainer {
     }
     
     private func registerPersistantStorages() {
-        let posterImageStorage: PosterImageStorageInterface = LRUCacheStorage()
+        let posterImageStorage: PosterImageStorageInterface = PosterLRUCacheStorage()
         
         container.register(instance: posterImageStorage)
     }

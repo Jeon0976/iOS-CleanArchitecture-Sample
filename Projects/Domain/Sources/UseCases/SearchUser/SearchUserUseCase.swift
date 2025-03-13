@@ -24,7 +24,7 @@ public protocol SearchUserUseCaseInterface: AnyObject {
     
     func searchInitialUsers(query: String) async throws -> [GithubUser]
     func loadNextPage() async throws -> [GithubUser]
-    func fetchUserImage(with imagePath: String, id: String) async throws -> Data
+    func fetchUserImage(with imagePath: String, id: Int) async throws -> Data
     func resetSearch()
 }
 
@@ -101,7 +101,8 @@ final class SearchUserUseCase: SearchUserUseCaseInterface {
     }
     
     func fetchUserImage(
-        with imagePath: String, id: String
+        with imagePath: String,
+        id: Int
     ) async throws -> Data {
         return try await posterImageRepository.featchPoster(
             with: imagePath,

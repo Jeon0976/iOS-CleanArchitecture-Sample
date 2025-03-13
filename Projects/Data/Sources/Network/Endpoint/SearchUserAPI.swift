@@ -62,7 +62,7 @@ extension SearchUserAPI: NetworkEndpoint {
                 "Authorization": "\(token)"
             ]
         case .downloadImage:
-            return nil
+            return [:]
         }
     }
 }

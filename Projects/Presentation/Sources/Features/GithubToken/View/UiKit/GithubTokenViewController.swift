@@ -13,6 +13,7 @@ final class GithubTokenViewController: BaseViewController {
     var viewModel: GithubTokenViewModel!
     
     private let loginButtonTapped = PassthroughSubject<Void, Never>()
+    let redirectCode = PassthroughSubject<String, Never>()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -104,7 +105,8 @@ final class GithubTokenViewController: BaseViewController {
     
     override func bind() {
         let input = GithubTokenViewModel.Input(
-            loginButtonTapped: loginButtonTapped.eraseToAnyPublisher()
+            loginButtonTapped: loginButtonTapped.eraseToAnyPublisher(),
+            redirectCode: redirectCode.eraseToAnyPublisher()
         )
         
         let output = viewModel.transform(input: input)

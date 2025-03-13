@@ -7,13 +7,25 @@
 
 import UIKit
 
-final class GithubTokenCoordinator: Coordinator {
+import Shared
+
+public final class GithubTokenCoordinator: Coordinator, RootCoordinator {
     var navigationController: UINavigationController
     
     var childCoordinators: [Coordinator] = []
     var viewControllerFactory: ViewControllerFactoryInterface
 
     weak var finishDelegate:  CoordinatorFinishDelegate?
+    weak public var rootFinishDelegate: RootCoordinatorDidFinishDelegate?
+
+    private var viewController: GithubTokenViewController?
+    
+    public init(
+        navigationController: UINavigationController
+    ) {
+        self.navigationController = navigationController
+        self.viewControllerFactory = ViewControllerFactory.shared
+    }
     
     init(
         navigationController: UINavigationController,
@@ -23,32 +35,30 @@ final class GithubTokenCoordinator: Coordinator {
         self.viewControllerFactory = factory
     }
     
-    func start() {
+    public func launch(with window: UIWindow) {
         let viewController = viewControllerFactory.makeGithubTokenViewController()
-        
-        viewController.viewModel.coordinator = self
-        navigationController.pushViewController(
-            viewController,
-            animated: false
-        )
-    }
-    
-    func start(window: UIWindow) {
-        let viewController = viewControllerFactory.makeGithubTokenViewController()
-        
-        viewController.viewModel.coordinator = self
-        navigationController.pushViewController(
-            viewController,
-            animated: false
-        )
 
+        self.viewController = viewController
+        
+        viewController.viewModel.coordinator = self
+        navigationController.pushViewController(
+            viewController,
+            animated: false
+        )
+        
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+    }
+    
+    func start() {}
+    
+    public func fetchGithubAccessToken(with code: String) {
+        viewController?.redirectCode.send(code)
     }
 }
 
 extension GithubTokenCoordinator: GithubTokenCoordinatorActions {
-    func moveToRoot() {
-        finishDelegate?.coordinatorDidFinish(self)
+    public func moveToRoot() {
+        rootFinishDelegate?.coordinatorDidFinish(self)
     }
 }

@@ -27,11 +27,11 @@ final class SearchUserItemViewModel: BaseViewModel, ObservableObject {
     typealias Input = SearchUserItemViewModelInput
     typealias Output = SearchUserItemViewModelOutput
     
-    private(set) var user: GithubUser
+    let user: GithubUser
     
     private let imageDataSubject = PassthroughSubject<Data, Never>()
     private let errorSubject = PassthroughSubject<Error, Never>()
-
+    
     init(
         usecase: SearchUserUseCaseInterface,
         user: GithubUser

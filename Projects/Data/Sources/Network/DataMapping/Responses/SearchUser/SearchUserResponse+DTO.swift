@@ -31,7 +31,7 @@ struct SearchUsersResponse: Decodable {
 
 
 struct SearchUserResponse: Decodable {
-    let id: String
+    let id: Int
     let name: String
     let url: String
     let imagePath: String

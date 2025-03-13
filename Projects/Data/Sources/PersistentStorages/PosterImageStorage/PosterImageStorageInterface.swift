@@ -16,6 +16,6 @@ import Foundation
 public protocol PosterImageStorageInterface {
     var capacity: UInt { get }
     
-    func getData(key: String) async -> Data?
-    func setData(key: String, value: Data) async
+    func getData(key: Int) async -> Data?
+    func setData(key: Int, value: Data) async
 }

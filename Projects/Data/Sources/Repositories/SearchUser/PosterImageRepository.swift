@@ -24,22 +24,26 @@ final class PosterImageRepository: PosterImageRepsitoryInterface {
     
     func featchPoster(
         with imagePath: String,
-        userID: String
+        userID: Int
     ) async throws -> Data {
+
         if let cachedData = await cache.getData(key: userID) {
+            print("캐시에서 이미지 로드됨: \(userID)")
+
             return cachedData
         }
         
+        print("이미지 다운로드 시도: \(imagePath)")
+
         do {
-            let data = try await networkSession.request(
-                SearchUserAPI.downloadImage(url: imagePath),
-                type: Data.self
-            )
+            let data = try Data(contentsOf: URL(string: imagePath)!)
             
+            print("이미지 다운로드 성공: \(data.count) 바이트")
             await cache.setData(key: userID, value: data)
-            
             return data
         } catch {
+            print("이미지 다운로드 실패: \(error.localizedDescription)")
+
             throw error
         }
     }

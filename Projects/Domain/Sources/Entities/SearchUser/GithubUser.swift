@@ -30,13 +30,13 @@ public struct GithubUsersPage: Equatable {
 }
 
 public struct GithubUser: Equatable {
-    public let id: String
+    public let id: Int
     public let name: String
     public let posterPath: String
     public let url: URL
     
     public init(
-        id: String,
+        id: Int,
         name: String,
         posterPath: String,
         url: URL

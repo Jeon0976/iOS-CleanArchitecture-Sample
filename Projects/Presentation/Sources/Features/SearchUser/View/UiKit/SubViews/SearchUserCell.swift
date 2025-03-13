@@ -11,7 +11,7 @@ import Combine
 final class SearchUserCell: UITableViewCell {
     // MARK: - Property
     static let identifier = String(describing: SearchUserCell.self)
-            
+    
     private var viewModel: SearchUserItemViewModel?
     
     private var cancellables = Set<AnyCancellable>()
@@ -29,7 +29,7 @@ final class SearchUserCell: UITableViewCell {
         
         return label
     }()
-        
+    
     private let urlLinkLabel: UILabel = {
         let label = UILabel()
         
@@ -61,7 +61,7 @@ final class SearchUserCell: UITableViewCell {
         
         return view
     }()
-            
+    
     // MARK: - Initialization
     override init(
         style: UITableViewCell.CellStyle,
@@ -163,14 +163,16 @@ final class SearchUserCell: UITableViewCell {
             input: SearchUserItemViewModelInput()
         )
         
-        viewModel.fetchImage()
-        
         output.imageData
             .sink { [weak self] data in
                 guard let self = self else { return }
-                
                 self.imageLoadingSpinner.isHidden = true
-                self.posterImageView.image = UIImage(data: data)
+                
+                if let image = UIImage(data: data) {
+                    self.posterImageView.image = image
+                } else {
+                    self.posterImageView.backgroundColor = .lightGray
+                }
             }
             .store(in: &cancellables)
         
@@ -182,6 +184,8 @@ final class SearchUserCell: UITableViewCell {
                 self.posterImageView.backgroundColor = .lightGray
             }
             .store(in: &cancellables)
+        
+        viewModel.fetchImage()
     }
     
     func getURL() -> URL {

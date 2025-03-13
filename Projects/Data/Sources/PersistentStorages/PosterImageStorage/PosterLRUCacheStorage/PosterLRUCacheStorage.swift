@@ -7,21 +7,21 @@
 
 import Foundation
 
-actor LRUCacheStorage: PosterImageStorageInterface {
+actor PosterLRUCacheStorage: PosterImageStorageInterface {
     private struct CacheNode {
-        let key: String
+        let key: Int
         var value: Data
     }
         
     let capacity: UInt
-    private var dict = [String: Node<CacheNode>]()
+    private var dict = [Int: Node<CacheNode>]()
     private var list = DoublyLinkedList<CacheNode>()
     
     init(capacity: UInt = 330) {
         self.capacity = capacity
     }
     
-    func getData(key: String) async -> Data? {
+    func getData(key: Int) async -> Data? {
         guard let node = dict[key] else { return nil }
         
         list.moveToHead(node: node)
@@ -29,7 +29,7 @@ actor LRUCacheStorage: PosterImageStorageInterface {
         return node.value.value
     }
     
-    func setData(key: String, value: Data) async {
+    func setData(key: Int, value: Data) async {
         if let node = dict[key] {
             list.moveToHead(node: node)
             

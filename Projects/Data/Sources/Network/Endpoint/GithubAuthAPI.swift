@@ -19,7 +19,7 @@ extension GithubAuthAPI: NetworkEndpoint {
     var path: String {
         switch self {
         case .requestAccessToken:
-            return "login/ouath/access_token"
+            return "login/oauth/access_token"
         }
     }
     

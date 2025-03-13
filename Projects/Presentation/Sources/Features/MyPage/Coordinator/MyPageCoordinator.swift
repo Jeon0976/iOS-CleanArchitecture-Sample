@@ -24,9 +24,19 @@ final class MyPageCoordinator: Coordinator {
     }
     
     func start() {
-        let testViewController = UIViewController()
-        testViewController.view.backgroundColor = .red
+        let viewController = viewControllerFactory.makeMyPageViewController()
         
-        navigationController.pushViewController(testViewController, animated: true)
+        viewController.viewModel.coordinator = self
+        
+        navigationController.pushViewController(
+            viewController,
+            animated: false
+        )
+    }
+}
+
+extension MyPageCoordinator: MyPageCoordinatorActions {
+    func backToLogin() {
+        finishDelegate?.coordinatorDidFinish(self)
     }
 }

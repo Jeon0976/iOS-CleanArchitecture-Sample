@@ -27,6 +27,7 @@ final class SearchUserCoordinator: Coordinator {
         let viewController = viewControllerFactory.makeSearchUserViewController()
         
         viewController.viewModel.coordinator = self
+        
         navigationController.pushViewController(
             viewController,
             animated: false

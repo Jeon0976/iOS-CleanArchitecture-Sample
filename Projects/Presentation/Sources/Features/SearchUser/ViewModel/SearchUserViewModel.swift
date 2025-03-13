@@ -32,7 +32,7 @@ struct SearchUserViewModelOutput: ViewModelOutput {
 }
 
 final class SearchUserViewModel: BaseViewModel, ObservableObject {
-    private var searchUserUseCase: SearchUserUseCaseInterface!
+    private var searchUserUseCase: SearchUserUseCaseInterface
     
     private var cancellables = Set<AnyCancellable>()
     

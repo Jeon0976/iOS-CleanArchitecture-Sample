@@ -77,7 +77,9 @@ final class MyPageViewController: BaseViewController {
         
         button.setTitle("로그아웃", for: .normal)
         button.backgroundColor = .black
+        button.layer.cornerRadius = 6
         button.setTitleColor(.white, for: .normal)
+        
 
         return button
     }()
@@ -141,12 +143,19 @@ final class MyPageViewController: BaseViewController {
             
             logoutButton.topAnchor.constraint(equalTo: followStackView.bottomAnchor, constant: 16),
             logoutButton.centerXAnchor.constraint(equalTo: followStackView.centerXAnchor),
+            logoutButton.widthAnchor.constraint(equalToConstant: 120),
+            logoutButton.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
     
     override func setupAttribute() {
         self.view.backgroundColor = .white
 
+        logoutButton.addTarget(
+            self,
+            action: #selector(logoutButtonTapped(_:)),
+            for: .touchUpInside
+        )
     }
     
     override func bind() {
@@ -178,5 +187,9 @@ final class MyPageViewController: BaseViewController {
                 )
             }
             .store(in: &cancellables)
+    }
+    
+    @objc private func logoutButtonTapped(_ sender: UIButton) {
+        loginButtonTappedTrigger.send()
     }
 }

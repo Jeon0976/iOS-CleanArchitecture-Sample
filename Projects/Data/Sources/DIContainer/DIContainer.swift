@@ -29,7 +29,10 @@ public final class DataDIContainer {
     private func registerPersistantStorages() {
         let posterImageStorage: PosterImageStorageInterface = PosterLRUCacheStorage()
         
+        let userStorage: UserStorageInterface = UserVolatileStorage()
+        
         container.register(instance: posterImageStorage)
+        container.register(instance: userStorage)
     }
     
     private func registerRepository() {
@@ -46,9 +49,15 @@ public final class DataDIContainer {
             cache: container.resolve()
         )
         
+        let userRepository: UserRepositoryInterface = UserRepository(
+            networkSession: container.resolve(),
+            userStorage: container.resolve()
+        )
+        
         container.register(instance: githubTokenRepository)
         container.register(instance: searchUserRepository)
         container.register(instance: posterImageRepository)
+        container.register(instance: userRepository)
     }
     
 }

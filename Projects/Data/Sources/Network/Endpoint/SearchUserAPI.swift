@@ -59,7 +59,7 @@ extension SearchUserAPI: NetworkEndpoint {
         case .requestUsers(_, let token):
             return [
                 "Accept": "application/vnd.github.v3+json",
-                "Authorization": "\(token)"
+                "Authorization": "Bearer \(token)"
             ]
         case .downloadImage:
             return [:]

@@ -25,7 +25,7 @@ struct GithubTokenViewOutput: ViewModelOutput {
 }
 
 final class GithubTokenViewModel: BaseViewModel, ObservableObject {
-    private var tokenUseCase: GithubTokenUseCaseInterface!
+    private var tokenUseCase: GithubTokenUseCaseInterface
     
     private var cancellables = Set<AnyCancellable>()
     

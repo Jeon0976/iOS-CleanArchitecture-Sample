@@ -13,6 +13,7 @@ import DependencyInjection
 protocol ViewControllerFactoryInterface {
     func makeGithubTokenViewController() -> GithubTokenViewController
     func makeSearchUserViewController() -> SearchUserViewController
+    func makeMyPageViewController() -> MyPageViewController
 }
 
 final class ViewControllerFactory: ViewControllerFactoryInterface {
@@ -32,5 +33,11 @@ final class ViewControllerFactory: ViewControllerFactoryInterface {
         let viewModel = SearchUserViewModel(searchUserUseCase: container.resolve())
         
         return SearchUserViewController(viewModel: viewModel)
+    }
+    
+    func makeMyPageViewController() -> MyPageViewController {
+        let viewModel = MyPageViewModel(userUseCase: container.resolve())
+        
+        return MyPageViewController(viewModel: viewModel)
     }
 }

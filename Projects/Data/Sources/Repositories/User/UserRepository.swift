@@ -27,13 +27,19 @@ final class UserRepository: UserRepositoryInterface {
             return cachedUser
         }
         
-        let user = try await networkSession.request(
+        let userResponse = try await networkSession.request(
             UserAPI.getUser(token: token),
             type: UserResponse.self
-        ).toDomain()
+        )
+        
+        let user = try await userResponse.toDomain()
         
         userStorage.saveUser(user)
         
         return user
+    }
+    
+    func clearUser() {
+        userStorage.clearUser()
     }
 }

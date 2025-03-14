@@ -10,7 +10,7 @@ import Foundation
 import Domain
 
 struct UserResponse: Decodable {
-    let id: String
+    let id: Int
     let name: String
     let imagePath: String
     let url: String
@@ -21,19 +21,24 @@ struct UserResponse: Decodable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "login"
-        case imagePath = "avater_url"
+        case imagePath = "avatar_url"
         case url = "html_url"
         case location
         case followers
         case following
     }
     
-    func toDomain() throws -> User {
-        let imageData = try Data(contentsOf: URL(string: imagePath)!)
+    func toDomain() async throws -> User {
+        print("GOGOGO")
+        
+        let (data, _) = try await URLSession.shared.data(from: URL(string: imagePath)!)
+        
+        print("GOGO")
         
         return User(
             id: id,
-            poster: imageData,
+            name: name,
+            poster: data,
             location: location,
             followers: followers,
             following: following

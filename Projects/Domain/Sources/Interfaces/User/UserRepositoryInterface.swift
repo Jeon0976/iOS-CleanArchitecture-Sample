@@ -9,4 +9,5 @@ import Foundation
 
 public protocol UserRepositoryInterface {
     func getUser(token: String) async throws -> User
+    func clearUser()
 }

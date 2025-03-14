@@ -15,6 +15,7 @@ public enum UserUseCaseError: Error {
 
 public protocol UserUseCaseInterface: AnyObject {
     func fetchUser() async throws -> User
+    func logout()
 }
 
 final class UserUseCase: UserUseCaseInterface {
@@ -36,5 +37,10 @@ final class UserUseCase: UserUseCaseInterface {
         }
         
         return try await userRepository.getUser(token: token)
+    }
+    
+    func logout() {
+        tokenStorage.clear()
+        userRepository.clearUser()
     }
 }

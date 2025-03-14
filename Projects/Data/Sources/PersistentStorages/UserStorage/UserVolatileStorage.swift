@@ -9,15 +9,18 @@ import Foundation
 
 import Domain
 
-public final class UserVolatileStorage: UserStorageInterface {
-    
+final class UserVolatileStorage: UserStorageInterface {
     var user: User?
     
-    public func saveUser(_ user: User) {
+    func saveUser(_ user: User) {
         self.user = user
     }
 
-    public func loadUser() -> User? {
+    func loadUser() -> User? {
         return user
+    }
+    
+    func clearUser() {
+        self.user = nil
     }
 }

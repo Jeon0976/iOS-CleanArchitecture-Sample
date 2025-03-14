@@ -8,20 +8,23 @@
 import Foundation
 
 public struct User {
-    let id: String
-    let poster: Data
-    let location: String
-    let followers: Int
-    let following: Int
+    let id: Int
+    public let name: String
+    public let poster: Data
+    public let location: String
+    public let followers: Int
+    public let following: Int
     
     public init(
-        id: String,
+        id: Int,
+        name: String,
         poster: Data,
         location: String,
         followers: Int,
         following: Int
     ) {
         self.id = id
+        self.name = name
         self.poster = poster
         self.location = location
         self.followers = followers

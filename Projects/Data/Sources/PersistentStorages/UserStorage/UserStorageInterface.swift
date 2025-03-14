@@ -9,7 +9,8 @@ import Foundation
 
 import Domain
 
-public protocol UserStorageInterface {
+protocol UserStorageInterface {
     func saveUser(_ user: User)
     func loadUser() -> User?
+    func clearUser()
 }

@@ -7,8 +7,6 @@
 
 import UIKit
 
-import DependencyInjection
-import Presentation
 import Data
 import Domain
 import Core

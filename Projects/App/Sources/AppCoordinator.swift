@@ -12,7 +12,6 @@ import Core
 import Presentation
 import DependencyInjection
 
-
 @MainActor
 final class AppCoordinator {
     

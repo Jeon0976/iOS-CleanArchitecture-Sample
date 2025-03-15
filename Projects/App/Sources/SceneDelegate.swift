@@ -25,7 +25,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let coordinator = AppCoordinator()
         
         coordinator.launch(with: window)
-        
+        window.overrideUserInterfaceStyle = .light
+
         self.appCoordinator = coordinator
         self.window = window
     }

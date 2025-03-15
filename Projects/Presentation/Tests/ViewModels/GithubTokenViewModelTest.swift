@@ -20,6 +20,7 @@ final class GithubTokenViewModelTest: XCTestCase {
     private var output: GithubTokenViewOutput!
     
     private let loginButtonSubject = PassthroughSubject<Void, Never>()
+    private let redirectCodeSubject = PassthroughSubject<String, Never>()
     
     private var sut: GithubTokenViewModel!
     
@@ -34,7 +35,7 @@ final class GithubTokenViewModelTest: XCTestCase {
         cancellables = []
         
         input = GithubTokenViewInput(
-            loginButtonTapped: loginButtonSubject.eraseToAnyPublisher()
+            loginButtonTapped: loginButtonSubject.eraseToAnyPublisher(), redirectCode: redirectCodeSubject.eraseToAnyPublisher()
         )
         
         output = sut.transform(input: input)

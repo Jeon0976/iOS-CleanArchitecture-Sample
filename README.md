@@ -146,14 +146,15 @@
     - finishDelegate를 통해 코디네이터 완료 시 부모에게 알림
     - attachChild와 detachChild 메서드로 하위 코디네이터 등록 및 해제 간소화
 ### Network 
-    - 외부 라이브러리 의존성 없이 자체 구현한 네트워크 계층을 사용합니다. 
-    - Network Endpoint 
-    - Network Task
-    - Parameter Encoding
-    - NetworkSession
-    - NetworkLogger
-    - NetworkError
-    - 와 같이 구현했으며, Stub 모드를 지원하여 네트워크 없이도 테스트가 가능하도록 설계했습니다.
+- 외부 라이브러리 의존성 없이 자체 구현한 네트워크 계층을 사용합니다. 
+- Network Endpoint 
+- Network Task
+- Parameter Encoding
+- NetworkSession
+- NetworkLogger
+- NetworkError
+- 와 같이 구현했으며, Stub 모드를 지원하여 네트워크 없이도 테스트가 가능하도록 설계했습니다.
+
 ### Storage
 ### Data / Domain 
 ### Presentation

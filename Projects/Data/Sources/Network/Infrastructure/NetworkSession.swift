@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Shared
-
 open class NetworkSession {
     private let session: URLSession
     private let isStub: Bool

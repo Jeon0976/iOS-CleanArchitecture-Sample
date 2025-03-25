@@ -69,6 +69,7 @@ final class SearchUserViewModel: BaseViewModel, ObservableObject {
         
         input.searchUser
             .filter { !$0.isEmpty }
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .sink { [weak self] query in
                 self?.searchUsers(query: query)
             }

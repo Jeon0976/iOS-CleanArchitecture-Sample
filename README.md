@@ -145,19 +145,48 @@
     - viewControllerFactory를 통해 뷰 컨트롤러 생성 및 의존성 주입
     - finishDelegate를 통해 코디네이터 완료 시 부모에게 알림
     - attachChild와 detachChild 메서드로 하위 코디네이터 등록 및 해제 간소화
+
 ### Network 
 - 외부 라이브러리 의존성 없이 자체 구현한 네트워크 계층을 사용합니다. 
-- Network Endpoint 
-- Network Task
-- Parameter Encoding
-- NetworkSession
-- NetworkLogger
-- NetworkError
-- 와 같이 구현했으며, Stub 모드를 지원하여 네트워크 없이도 테스트가 가능하도록 설계했습니다.
+- 프로토콜 지향 설계로 유연성을 높였습니다. 
+- Stub 모드를 지원하며 네트워크 없이 테스트가 가능합니다. 
+- 콜백 기반 방식 대신 Swift Concurrency를 활용한 비동기 네트워킹을 구현했습니다. 
+- 주요 컴포넌트
+    - Network Endpoint 
+        - 네트워크 요청의 기본 정보를 캡슐화하는 프로토콜
+    - Network Task
+        - 네트워크 요청 데이터 형식을 정의 (Plain, Json, Parameter 등)
+    - Parameter Encoding
+        - URL 또는 JSON 형식으로 매개변수 인코딩 처리
+    - NetworkSession
+        - 실제 네트워크 요청 수행 및 응답 처리 
+    - NetworkLogger
+        - 디버깅을 위한 네트워크 요청/응답 정보 로깅
+    - NetworkError
+        - 발생 가능한 네트워크 관련 오류 열거형으로 정의 
 
 ### Storage
+- 추상화된 스토리지 인터페이스
+    - 각 스토리지 계층은 인터페이스로 추상화되어 구현체 교체가 용이합니다.
+    - 의존성 주입을 통해 테스트 시 Mock 구현체 활용이 가능합니다. 
+- 토큰 스토리지
+    - 토큰 관리를 위한 핵심 프로토콜이며, 해당 스토리지는 Core 계층에 있습니다.
+- 이미지 캐싱 스토리지
+    - LRU(Least Recently Used)알고리즘 기반으로 구현했으며, Actor 활용으로 동시성 문제를 해결했습니다.
+    - 더블 링크드 리스트와 딕셔너리 조합으로 O(1) 접근 시간을 보장하고 있습니다. 
+- 사용자 데이터 스토리지 
+    - 앱이 실행 중일 때만 유지되는 휘발성 스토리지 입니다. 
+    
 ### Data / Domain 
+- 프로토콜 기반 통신
+    - 인터페이스 정의 및 구현체 제공 
+- Swift Concurrency 활용 
+- 의존성 주입 
+
 ### Presentation
+- Combine을 활용한 MVVM 패턴 
+- MainActor 활용으로 UI 업데이트 관련 메인 스레드 안정성 보장 
+- Coordinator 패턴 활용
 
 ## 기술 스택 및 라이브러리 
 - 비동기 처리: SwiftConcurrency (Data & Domain)

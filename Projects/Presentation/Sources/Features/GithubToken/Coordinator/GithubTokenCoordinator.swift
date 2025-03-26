@@ -13,7 +13,7 @@ public final class GithubTokenCoordinator: Coordinator, RootCoordinator {
     var navigationController: UINavigationController
     
     var childCoordinators: [Coordinator] = []
-    var viewControllerFactory: ViewControllerFactoryInterface
+    var viewControllerFactory: ViewFactoryInterface
 
     weak var finishDelegate:  CoordinatorFinishDelegate?
     weak public var rootFinishDelegate: RootCoordinatorDidFinishDelegate?
@@ -29,7 +29,7 @@ public final class GithubTokenCoordinator: Coordinator, RootCoordinator {
     
     init(
         navigationController: UINavigationController,
-        factory: ViewControllerFactoryInterface
+        factory: ViewFactoryInterface
     ) {
         self.navigationController = navigationController
         self.viewControllerFactory = factory

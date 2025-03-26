@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol PosterImageRepsitoryInterface {
-    func featchPoster(
+    func fetchPoster(
         with imagePath: String,
         userID: Int
     ) async throws -> Data

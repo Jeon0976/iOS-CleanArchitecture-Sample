@@ -10,12 +10,11 @@ import Foundation
 import Data
 
 final class MockPosterStorage: PosterImageStorageInterface {
-    
     var calledGetData = false
     var calledSetData = false
     
     private struct CacheValue {
-        let key: String
+        let key: Int
         var value: Data
     }
     
@@ -26,16 +25,16 @@ final class MockPosterStorage: PosterImageStorageInterface {
         self.capacity = capacity
     }
     
-    func getData(key: String) async -> Data? {
+    func getData(key: Int) async -> Data? {
+        calledGetData = true
+
         guard let value = list.first(where: { $0.key == key }) else { return nil
         }
-        
-        calledGetData = true
         
         return value.value
     }
     
-    func setData(key: String, value: Data) async {
+    func setData(key: Int, value: Data) async {
         calledSetData = true
         
         if let index = list.firstIndex(where: { $0.key == key }) {

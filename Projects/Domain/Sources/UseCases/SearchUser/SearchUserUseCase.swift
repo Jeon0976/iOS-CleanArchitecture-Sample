@@ -96,6 +96,7 @@ final class SearchUserUseCase: SearchUserUseCaseInterface {
         
         hasNextPage = usersPage.hasNextPage
         currentPage = usersPage.currentPage
+        totalPages = usersPage.totalPage
         
         return usersPage.users
     }
@@ -104,7 +105,7 @@ final class SearchUserUseCase: SearchUserUseCaseInterface {
         with imagePath: String,
         id: Int
     ) async throws -> Data {
-        return try await posterImageRepository.featchPoster(
+        return try await posterImageRepository.fetchPoster(
             with: imagePath,
             userID: id
         )

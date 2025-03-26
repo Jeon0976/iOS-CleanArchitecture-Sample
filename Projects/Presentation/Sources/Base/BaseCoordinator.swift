@@ -12,13 +12,13 @@ protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get }
     
     var childCoordinators: [Coordinator] { get set }
-    var viewControllerFactory: ViewControllerFactoryInterface { get }
+    var viewControllerFactory: ViewFactoryInterface { get }
 
     var finishDelegate: CoordinatorFinishDelegate? { get set }
     
     init(
         navigationController: UINavigationController,
-        factory: ViewControllerFactoryInterface
+        factory: ViewFactoryInterface
     )
     
     func start()

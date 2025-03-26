@@ -22,7 +22,7 @@ final class PosterImageRepository: PosterImageRepsitoryInterface {
         self.cache = cache
     }
     
-    func featchPoster(
+    func fetchPoster(
         with imagePath: String,
         userID: Int
     ) async throws -> Data {

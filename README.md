@@ -179,12 +179,16 @@
     
 ### Data / Domain 
 - 프로토콜 기반 통신
-    - 인터페이스 정의 및 구현체 제공 
+    - Domain 레이어에 Repository 인터페이스를 정의하고 Data 레이어에서 구현체를 제공
 - Swift Concurrency 활용 
+    - Data 및 Domain 레이어 전반에 걸쳐 async/await 활용 
 - 의존성 주입 
+    - Repository와 UseCase 모두 인터페이스를 통한 의존성 주입 
+    - DIContainer를 통해 인터페이스 타입으로 컴포넌트 등록 및 해결 
 
 ### Presentation
 - Combine을 활용한 MVVM 패턴 
+    - 입력과 출력 분리로 테스트 용이성 향상 
 - MainActor 활용으로 UI 업데이트 관련 메인 스레드 안정성 보장 
 - Coordinator 패턴 활용
 

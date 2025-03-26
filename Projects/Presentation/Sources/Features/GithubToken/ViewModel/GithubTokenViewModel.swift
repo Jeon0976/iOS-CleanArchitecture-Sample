@@ -76,7 +76,9 @@ final class GithubTokenViewModel: BaseViewModel, ObservableObject {
         errorSubject.send(error)
     }
     
-    func handleAuthorizationCode(_ code: AnyPublisher<String, Never>) {
+    func handleAuthorizationCode(
+        _ code: AnyPublisher<String, Never>
+    ) {
         code.sink { [weak self] personalCode in
             Task {
                 do {

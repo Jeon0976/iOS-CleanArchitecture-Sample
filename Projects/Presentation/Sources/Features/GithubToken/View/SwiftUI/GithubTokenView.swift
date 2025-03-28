@@ -53,9 +53,7 @@ private extension GithubTokenView {
 }
 
 private extension GithubTokenView {
-    func bind() {
-        let input = GithubTokenViewModel.Input(loginButtonTapped: <#T##AnyPublisher<Void, Never>#>, redirectCode: <#T##AnyPublisher<String, Never>#>)
-    }
+    func bind() {    }
 }
 
 #Preview {

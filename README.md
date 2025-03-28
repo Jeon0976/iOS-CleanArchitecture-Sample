@@ -199,3 +199,4 @@
 - 네트워크: URLSession
 - 이미지 캐싱: LRU Cache 구현 
 - 모듈 관리: Tuist
+- 테스트: XCTest

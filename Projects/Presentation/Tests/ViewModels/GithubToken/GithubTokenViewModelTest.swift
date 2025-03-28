@@ -46,7 +46,8 @@ final class GithubTokenViewModelTest: XCTestCase {
         mockGithubTokenUseCase = nil
         mockCoordinator = nil
         cancellables = nil
-        super.tearDown()
+        
+        try super.tearDownWithError()
     }
     
     func test_loginButtonTapped() {

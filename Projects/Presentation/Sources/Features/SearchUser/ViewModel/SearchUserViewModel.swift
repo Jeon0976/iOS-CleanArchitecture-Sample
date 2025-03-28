@@ -10,7 +10,9 @@ import Combine
 
 import Domain
 
-protocol SearchUserCoordinatorActions: AnyObject {
+typealias loadingType = (type: SearchUserLoadingType, isLoading: Bool)
+
+public protocol SearchUserCoordinatorActions: AnyObject {
     func backToLogin()
 }
 
@@ -46,7 +48,7 @@ final class SearchUserViewModel: BaseViewModel, ObservableObject {
     
     private let usersSubject = CurrentValueSubject<[SearchUserItemViewModel], Never>([])
     private let errorSubject = PassthroughSubject<Error, Never>()
-    private let isLoadingSubject = CurrentValueSubject<(type: SearchUserLoadingType, isLoading: Bool), Never>((.fullScreen, false))
+    private let isLoadingSubject = CurrentValueSubject<loadingType, Never>((.fullScreen, false))
     
     var users: [SearchUserItemViewModel] {
         get {
@@ -145,7 +147,7 @@ final class SearchUserViewModel: BaseViewModel, ObservableObject {
                         )
                     }
                     
-                    let existingIds = Set(usersSubject.value.map { $0.user.id })
+                    let existingIds = Set(usersSubject.value.map(\.user.id))
                     let uniqueViewModels = viewModels.filter { !existingIds.contains($0.user.id) }
                     
                     usersSubject.value.append(contentsOf: uniqueViewModels)

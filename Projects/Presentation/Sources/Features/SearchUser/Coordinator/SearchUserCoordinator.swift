@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchUserCoordinator: Coordinator {
+public final class SearchUserCoordinator: Coordinator {
     var navigationController: UINavigationController
     
     var childCoordinators: [Coordinator] = []
@@ -36,7 +36,7 @@ final class SearchUserCoordinator: Coordinator {
 }
 
 extension SearchUserCoordinator: SearchUserCoordinatorActions {
-    func backToLogin() {
+    public func backToLogin() {
         finishDelegate?.coordinatorDidFinish(self)
     }
 }

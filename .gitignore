@@ -68,3 +68,7 @@ Derived/
 
 ### Tuist managed dependencies ###
 Tuist/.build
+
+### Secrets ###
+# 실제 OAuth 키 — 템플릿(Secrets.xcconfig.template)만 커밋한다
+Secrets.xcconfig

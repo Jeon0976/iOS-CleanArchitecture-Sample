@@ -1,0 +1,4 @@
+// Data 타겟 빌드 설정 — OAuth 시크릿 주입 지점.
+// 실제 키는 루트의 Secrets.xcconfig(gitignore 대상)에 두고, 여기서 optional include 한다.
+// 파일이 없어도 빌드는 된다(#include?) — 키 미설정 시 로그인 단계에서 에러로 안내된다.
+#include? "../Secrets.xcconfig"

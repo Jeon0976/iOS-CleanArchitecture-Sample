@@ -18,9 +18,11 @@ let project = Project(
             product: .framework,
             bundleId: env.organizationName + ".Data",
             deploymentTargets: env.deploymentTargets,
+            // 시크릿은 하드코딩하지 않는다 — 빌드 설정($(변수))으로 치환되며,
+            // 실제 값은 루트 Secrets.xcconfig(gitignore 대상)에서 주입된다.
             infoPlist: .extendingDefault(with: [
-                "Github_Client_Id": "Ov23liG36Nf0oA1Dbs8I",
-                "Github_Client_secrets": "eacf64e05e0b265452dcc0a4c0396f1e83e2be50"
+                "Github_Client_Id": "$(GITHUB_CLIENT_ID)",
+                "Github_Client_secrets": "$(GITHUB_CLIENT_SECRET)"
             ]),
             sources: ["Sources/**"],
             resources: [],
@@ -37,7 +39,13 @@ let project = Project(
                     target: "Shared",
                     path: .relativeToRoot("Projects/Shared")
                 )
-            ]
+            ],
+            settings: .settings(
+                configurations: [
+                    .debug(name: "Debug", xcconfig: .relativeToRoot("XCConfig/Data.xcconfig")),
+                    .release(name: "Release", xcconfig: .relativeToRoot("XCConfig/Data.xcconfig"))
+                ]
+            )
         ),
         .target(
             name: "DataTests",

@@ -19,10 +19,10 @@ final public class DomainDIContainer {
     }
     
     private func registerGithubTokenUseCase() {
-        container.register {
+        container.register(GithubTokenUseCaseInterface.self) {
             let githubTokenUseCase: GithubTokenUseCaseInterface = GithubTokenUseCase(
-                tokenStorage: DIContainer.shared.resolve(),
-                githubTokenRepository: DIContainer.shared.resolve()
+                tokenStorage: DIContainer.shared.require(),
+                githubTokenRepository: DIContainer.shared.require()
             )
             
             return githubTokenUseCase
@@ -30,11 +30,11 @@ final public class DomainDIContainer {
     }
     
     private func registerSearchUserUseCase() {
-        container.register {
+        container.register(SearchUserUseCaseInterface.self) {
             let searchUserUseCase: SearchUserUseCaseInterface = SearchUserUseCase(
-                tokenStorage: DIContainer.shared.resolve(),
-                searchUserRepository: DIContainer.shared.resolve(),
-                posterImageRepository: DIContainer.shared.resolve()
+                tokenStorage: DIContainer.shared.require(),
+                searchUserRepository: DIContainer.shared.require(),
+                posterImageRepository: DIContainer.shared.require()
             )
             
             return searchUserUseCase
@@ -42,10 +42,10 @@ final public class DomainDIContainer {
     }
     
     private func registerUserUseCase() {
-        container.register {
+        container.register(UserUseCaseInterface.self) {
             let userUseCase: UserUseCaseInterface = UserUseCase(
-                tokenStorage: DIContainer.shared.resolve(),
-                userRepository: DIContainer.shared.resolve()
+                tokenStorage: DIContainer.shared.require(),
+                userRepository: DIContainer.shared.require()
             )
             
             return userUseCase

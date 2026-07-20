@@ -37,21 +37,21 @@ public final class DataDIContainer {
     
     private func registerRepository() {
         let githubTokenRepository: GithubTokenRepositoryInterface = GithubTokenRepository(
-            networkSession: container.resolve()
+            networkSession: container.require()
         )
                 
         let searchUserRepository: SearchUserRepositoryInterface = SearchUserRepository(
-            networkSession: container.resolve()
+            networkSession: container.require()
         )
         
         let posterImageRepository: PosterImageRepsitoryInterface = PosterImageRepository(
-            networkSession: container.resolve(),
-            cache: container.resolve()
+            networkSession: container.require(),
+            cache: container.require()
         )
         
         let userRepository: UserRepositoryInterface = UserRepository(
-            networkSession: container.resolve(),
-            userStorage: container.resolve()
+            networkSession: container.require(),
+            userStorage: container.require()
         )
         
         container.register(instance: githubTokenRepository)

@@ -28,25 +28,25 @@ final class ViewControllerFactory: ViewFactoryInterface {
     private let container = DIContainer.shared
     
     func makeGithubTokenView() -> GithubTokenView {
-        let viewModel = GithubTokenViewModel(githubTokenUseCase: container.resolve())
+        let viewModel = GithubTokenViewModel(githubTokenUseCase: container.require())
         
         return GithubTokenView(viewModel: viewModel)
     }
     
     func makeGithubTokenViewController() -> GithubTokenViewController {
-        let viewModel = GithubTokenViewModel(githubTokenUseCase: container.resolve())
+        let viewModel = GithubTokenViewModel(githubTokenUseCase: container.require())
         
         return GithubTokenViewController(viewModel: viewModel)
     }
     
     func makeSearchUserViewController() -> SearchUserViewController {
-        let viewModel = SearchUserViewModel(searchUserUseCase: container.resolve())
+        let viewModel = SearchUserViewModel(searchUserUseCase: container.require())
         
         return SearchUserViewController(viewModel: viewModel)
     }
     
     func makeMyPageViewController() -> MyPageViewController {
-        let viewModel = MyPageViewModel(userUseCase: container.resolve())
+        let viewModel = MyPageViewModel(userUseCase: container.require())
         
         return MyPageViewController(viewModel: viewModel)
     }

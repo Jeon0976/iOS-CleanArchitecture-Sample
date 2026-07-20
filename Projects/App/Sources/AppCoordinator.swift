@@ -21,7 +21,7 @@ final class AppCoordinator {
     var childCoordinators: [RootCoordinator] = []
     
     init(
-        tokenStorage: TokenStorage = DIContainer.shared.resolve()
+        tokenStorage: TokenStorage = DIContainer.shared.require()
     ) {
         self.tokenStorage = tokenStorage
     }
